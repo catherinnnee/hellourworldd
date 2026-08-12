@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informatika - Chelsea Catherine Pangestu</title>
+    <meta name="description" content="Artikel Informatika." />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- Tailwind Config (Tema Hijau Sage & Komplementer) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        nunito: ['Nunito', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        sage: { 50: '#f4fbf7', 100: '#e3f6ea', 200: '#c6ead5', 300: '#9ad7b5', 400: '#67be8f', 500: '#42a06f', 600: '#2f8055', 700: '#276645', 800: '#225239', 900: '#1d4431' },
+                        peach: { 50: '#fff9f5', 100: '#ffefe5', 200: '#ffdcc2', 300: '#ffc199', 400: '#ff9866', 500: '#fe7439', 600: '#ef561c' },
+                        lavender: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#8b5cf6' },
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'float-delayed': 'float 4s ease-in-out 2s infinite',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                        'typing': 'typing 2s steps(40, end), blink .75s step-end infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'wiggle': 'wiggle 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        typing: {
+                            from: { width: '0' },
+                            to: { width: '100%' }
+                        },
+                        blink: {
+                            'from, to': { borderColor: 'transparent' },
+                            '50%': { borderColor: '#42a06f' }
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-10deg)' },
+                            '50%': { transform: 'rotate(10deg)' },
+                        }
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f4fbf7 0%, #ffefe5 50%, #f5f3ff 100%);
+            background-attachment: fixed;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f4fbf7;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #9ad7b5;
+            border-radius: 99px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #67be8f;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-card-hover {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(66, 160, 111, 0.15);
+            border-color: rgba(103, 190, 143, 0.4);
+        }
+
+        .gradient-text-green {
+            background: linear-gradient(90deg, #42a06f, #67be8f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Background Blobs */
+        .blob-green {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(154, 215, 181, 0.6) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .blob-peach {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 193, 153, 0.5) 0%, transparent 70%);
+            bottom: -50px;
+            right: -50px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .blob-lavender {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(196, 181, 253, 0.4) 0%, transparent 70%);
+            top: 40%;
+            left: 60%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ================= DARK MODE OVERRIDES ================= */
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f172a 100%, #1e1b4b 50%, #311026 0%) !important;
+            background-attachment: fixed !important;
+            color: #f3f4f6 !important;
+        }
+
+        body.dark-mode .text-gray-800,
+        body.dark-mode .text-gray-700,
+        body.dark-mode .text-gray-600,
+        body.dark-mode .text-sage-800,
+        body.dark-mode .text-sage-700,
+        body.dark-mode .text-sage-600 {
+            color: #f3f4f6 !important;
+        }
+
+        body.dark-mode .text-gray-500,
+        body.dark-mode .text-sage-500,
+        body.dark-mode .text-sage-400 {
+            color: #cbd5e1 !important;
+        }
+
+        body.dark-mode .glass {
+            background: rgba(30, 41, 59, 0.65) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        body.dark-mode .bg-white\/50,
+        body.dark-mode .bg-white\/60,
+        body.dark-mode .bg-white\/70,
+        body.dark-mode .bg-white\/80,
+        body.dark-mode [class*="bg-sage-"] {
+            background-color: rgba(51, 65, 85, 0.5) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        body.dark-mode .bg-white {
+            background-color: #1e293b !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode header.glass {
+            background: rgba(15, 23, 42, 0.85) !important;
+        }
+
+        body.dark-mode h1.font-playfair,
+        body.dark-mode .gradient-text-green,
+        body.dark-mode h2.gradient-text-green,
+        body.dark-mode h3.font-playfair {
+            background: linear-gradient(135deg, #ff9866, #c4b5fd) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+
+        body.dark-mode .blob-green {
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
+        }
+
+        body.dark-mode .blob-peach {
+            background: radial-gradient(circle, rgba(255, 152, 102, 0.2) 0%, transparent 70%);
+        }
+
+        body.dark-mode .blob-lavender {
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-gray-800">
+
+    <!-- ELEMEN TERBANG TERSEBAR -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden hidden lg:block">
+        <span class="absolute left-6 top-[15%] text-3xl animate-float opacity-80">☘️</span>
+        <span class="absolute left-12 top-[45%] text-3xl animate-wiggle opacity-75">💖</span>
+        <span class="absolute left-8 top-[75%] text-4xl animate-float-delayed opacity-85">🐯</span>
+        <span class="absolute right-8 top-[25%] text-3xl animate-float-delayed opacity-80">🌸</span>
+        <span class="absolute right-12 top-[55%] text-3xl animate-float opacity-75">🐦</span>
+        <span class="absolute right-6 top-[85%] text-3xl animate-wiggle opacity-80">☘️</span>
+    </div>
+
+    <!-- Efek Latar Belakang -->
+    <div class="blob-green animate-pulse-slow"></div>
+    <div class="blob-peach animate-pulse-slow" style="animation-delay: 2s;"></div>
+    <div class="blob-lavender animate-pulse-slow" style="animation-delay: 1s;"></div>
+
+    <!-- TOP NAVBAR ESTETIK -->
+    <header
+        class="fixed top-0 left-0 right-0 z-50 glass px-4 lg:px-8 py-3 flex items-center justify-between shadow-sm overflow-hidden">
+        <span class="absolute top-2 right-1/4 text-2xl animate-float opacity-70 pointer-events-none">&#10024;</span>
+        <span class="absolute top-4 left-1/3 text-xl animate-wiggle opacity-60 pointer-events-none">&#127807;</span>
+        <span
+            class="absolute top-3 right-12 text-2xl animate-float-delayed opacity-80 pointer-events-none">&#127800;</span>
+        <span class="absolute -bottom-2 left-1/2 text-3xl animate-pulse opacity-40 pointer-events-none">&#127896;</span>
+
+        <a href="index.html"
+            class="flex items-center gap-3 cursor-pointer transition-transform hover:scale-105 relative z-10 text-decoration-none">
+            <img src="c:\Users\chhcp\Downloads\woww2.jpeg"
+                class="w-10 h-10 rounded-full border-2 border-sage-300 shadow-sm object-cover">
+            <div>
+                <p class="font-playfair font-bold text-sage-700 leading-tight">&#10023; Chelsea Website</p>
+                <p class="text-xs text-sage-500 font-medium">Student & Creator</p>
+            </div>
+        </a>
+
+        <div class="flex items-center gap-4 relative z-10">
+            <button id="theme-toggle"
+                class="text-sage-600 text-xl bg-white/50 p-2.5 rounded-xl shadow-sm border border-sage-100 focus:outline-none hover:bg-sage-100 hover:scale-105 transition-all">
+                <i class="fa-solid fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- WRAPPER UTAMA -->
+    <main class="relative z-10 px-6 md:px-12 max-w-5xl mx-auto pt-28 pb-12 min-h-screen">
+        <!-- ========================================== -->
+        <!-- HALAMAN 1: MENU DAFTAR TUGAS -->
+        <!-- ========================================== -->
+        <div id="menu-utama" class="fade-in block">
+            <a href="index.html"
+                class="inline-flex items-center gap-2 text-sage-700 font-bold mb-8 hover:text-sage-500 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
+            </a>
+
+            <h1 class="text-3xl font-extrabold text-sage-800 mb-2 font-playfair">Informatika</h1>
+            <p class="text-gray-500 mb-8">Kumpulan artikel, materi, dan analisis mata pelajaran Informatika.</p>
+
+
+            <!-- SEKSI 1: DAFTAR TUGAS & MATERI SEKOLAH -->
+            <div class="mb-10">
+                <div class="flex items-center gap-3 mb-4 border-b border-sage-200 pb-3">
+                    <span class="w-1.5 h-6 bg-sage-600 rounded-full"></span>
+                    <h2 class="text-xl font-bold text-sage-900 dark:text-sage-300 font-playfair">📚 Materi & Tugas
+                        Sekolah</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Kartu Artikel Keuangan (Existing) -->
+                    <button onclick="bukaTugas('artikel-keuangan')"
+                        class="text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-100 glass-card-hover group block w-full">
+                        <div
+                            class="w-12 h-12 bg-sage-100 text-sage-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Artikel Keuangan</h2>
+                        <p class="text-sm text-gray-500">Peran Informatika di Industri Keuangan.</p>
+                    </button>
+
+                    <!-- Kartu Artikel Informatika -->
+                    <button onclick="bukaTugas('artikel-informatika')"
+                        class="text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-100 glass-card-hover group block w-full">
+                        <div
+                            class="w-12 h-12 bg-sage-100 text-sage-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Artikel Informatika</h2>
+                        <p class="text-sm text-gray-500">Pengantar ilmu informatika dan perannya.</p>
+                    </button>
+
+                    <!-- Kartu Sistem Digital -->
+                    <button onclick="bukaTugas('sistem-digital')"
+                        class="text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-100 glass-card-hover group block w-full">
+                        <div
+                            class="w-12 h-12 bg-sage-100 text-sage-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Sistem Digital</h2>
+                        <p class="text-sm text-gray-500">Materi pengenalan tentang Sistem Digital.</p>
+                    </button>
+
+                    <!-- Kartu Kriptografi -->
+                    <button onclick="bukaTugas('kriptografi')"
+                        class="text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-100 glass-card-hover group block w-full">
+                        <div
+                            class="w-12 h-12 bg-sage-100 text-sage-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Kriptografi</h2>
+                        <p class="text-sm text-gray-500">Materi pengenalan tentang Kriptografi.</p>
+                    </button>
+
+                    <!-- Kartu Analisis Film -->
+                    <button onclick="bukaTugas('imitation-game')"
+                        class="text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-100 glass-card-hover group block w-full">
+                        <div
+                            class="w-12 h-12 bg-sage-100 text-sage-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-film"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">The Imitation Game</h2>
+                        <p class="text-sm text-gray-500">Analisis film The Imitation Game.</p>
+                    </button>
+
+                    <!-- Kartu Vibe Coding  -->
+                    <button onclick="bukaTugas('vibe-coding')"
+                        class="text-left bg-white p-6 rounded-2xl shadow-sm border border-gray-100 glass-card-hover group block w-full">
+                        <div
+                            class="w-12 h-12 bg-sage-100 text-sage-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Vibe Coding</h2>
+                        <p class="text-sm text-gray-500">Materi pengenalan tentang Vibe Coding.</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SEKSI 2: ZONE GAME & TOOLS INTERAKTIF (TERPISAH DARI TUGAS) -->
+            <div class="mt-12 pt-8 border-t-2 border-dashed border-sage-200">
+                <div class="flex items-center justify-between gap-3 mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-emerald-500 rounded-full"></span>
+                        <h2
+                            class="text-xl font-extrabold text-emerald-900 dark:text-emerald-300 font-playfair flex items-center gap-2">
+                            <span>🎮</span> Zone Game & Tools Interaktif
+                        </h2>
+                    </div>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-bold">Interaktif
+                        Zone</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- KARTU INTERAKTIF BARU: BINARY CODE BREAKER -->
+                    <button onclick="bukaTugas('game-binary')"
+                        class="text-left bg-gradient-to-br from-emerald-50 to-teal-100 p-6 rounded-2xl shadow-sm border border-emerald-200 glass-card-hover group block w-full">
+                        <div
+                            class="w-12 h-12 bg-emerald-500 text-white rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform shadow-md">
+                            <i class="fa-solid fa-terminal"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-emerald-900 mb-2 flex items-center gap-2">
+                            <span>Binary Breaker</span> <span
+                                class="text-xs bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded-full font-bold">GAME</span>
+                        </h2>
+                        <p class="text-sm text-emerald-700">Mini-game dekripsi biner cepat 30 detik!</p>
+                    </button>
+
+                    <!-- KARTU INTERAKTIF BARU: SPEED CODE TYPER -->
+                    <button onclick="bukaTugas('game-typer')"
+                        class="text-left bg-gradient-to-br from-indigo-50 to-purple-100 p-6 rounded-2xl shadow-sm border border-indigo-200 glass-card-hover group block w-full">
+                        <div
+                            class="w-12 h-12 bg-indigo-500 text-white rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform shadow-md">
+                            <i class="fa-solid fa-keyboard"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-indigo-900 mb-2 flex items-center gap-2">
+                            <span>Speed Code Typer</span> <span
+                                class="text-xs bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded-full font-bold">GAME</span>
+                        </h2>
+                        <p class="text-sm text-indigo-700">Uji kecepatan mengetik kode & WPM kamu!</p>
+                    </button>
+
+                    <!-- KARTU INTERAKTIF BARU: SIMULATOR KRIPTOGRAFI -->
+                    <button onclick="bukaTugas('tool-cipher')"
+                        class="text-left bg-gradient-to-br from-amber-50 to-orange-100 p-6 rounded-2xl shadow-sm border border-amber-200 glass-card-hover group block w-full">
+                        <div
+                            class="w-12 h-12 bg-amber-500 text-white rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform shadow-md">
+                            <i class="fa-solid fa-user-secret"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-amber-900 mb-2 flex items-center gap-2">
+                            <span>Cipher Simulator</span> <span
+                                class="text-xs bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full font-bold">TOOL</span>
+                        </h2>
+                        <p class="text-sm text-amber-700">Enkripsi & dekripsi pesan rahasia secara live!</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- HALAMAN 2: ARTIKEL KEUANGAN (Existing) -->
+        <!-- ========================================== -->
+        <div id="tugas-artikel-keuangan" class="hidden">
+            <button onclick="kembaliKeMenu()"
+                class="inline-flex items-center gap-2 text-sage-700 font-bold mb-8 hover:text-sage-500">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Tugas
+            </button>
+            <div
+                class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 relative glass-card-hover border-t-4 border-t-sage-400">
+                <!-- Metadata Artikel -->
+                <div
+                    class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-sage-200">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-sage-100 text-sage-700 text-xs font-bold px-3 py-1.5 rounded-md">
+                            <i class="fa-solid fa-newspaper mr-1"></i> Artikel Utama
+                        </span>
+                    </div>
+                    <div class="text-sm text-gray-500 font-semibold flex items-center gap-4">
+                        <span><i class="fa-solid fa-pen-nib text-sage-500 mr-1"></i> Chelsea Catherine Pangestu</span>
+                        <span><i class="fa-regular fa-calendar-days text-sage-500 mr-1"></i> 29 Juli 2026</span>
+                    </div>
+                </div>
+
+                <h1 class="text-3xl font-extrabold text-sage-800 mb-6 font-playfair">Peran Informatika dalam Membangun
+                    Masa Depan Industri Keuangan di Indonesia</h1>
+
+                <div class="text-gray-700 leading-relaxed text-justify space-y-4">
+                    <p>Sektor keuangan di Indonesia sedang mengalami revolusi digital yang sangat pesat. Mulai dari
+                        sistem pembayaran tanpa kas (cashless), pasar saham digital, hingga analisis risiko perbankan
+                        modern, semuanya kini bergantung pada teknologi informasi. Dalam dunia finance hari ini,
+                        informatika bukan lagi sekadar instrumen pendukung, melainkan roda penggerak utama yang
+                        menentukan efisiensi, keamanan, dan keberlanjutan seluruh ekosistem keuangan nasional.</p>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Mengapa Informatika Berperan Vital dalam Dunia
+                        Finance?</h3>
+                    <p>Pengelolaan keuangan modern melibatkan volume data transaksi yang sangat masif setiap detiknya.
+                        Tanpa sistem informatika yang andal, pemrosesan transaksi berkecepatan tinggi hampir tidak
+                        mungkin dilakukan secara akurat. Informatika menyediakan infrastruktur logika, pustaka
+                        algoritma, dan arsitektur basis data yang dibutuhkan untuk memproses transaksi finansial secara
+                        otomatis dan minim risiko kesalahan (human error).</p>
+                    <p>Penerapan <i>cloud computing</i> dan arsitektur <i>microservices</i> dalam ilmu informatika
+                        memungkinan bank serta lembaga keuangan memproses jutaan permintaan transaksi harian tanpa
+                        mengalami kelumpuhan sistem (downtime). Hal ini menjaga ketersediaan layanan keuangan secara
+                        terus-menerus (24/7) bagi masyarakat.</p>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Optimalisasi Sistem Keuangan Melalui Teknologi
+                        Informasi</h3>
+                    <p>Keandalan ilmu informatika dalam industri keuangan terlihat jelas pada beberapa bidang kunci:</p>
+                    <ul class="list-none space-y-4 ml-2">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-shield-halved text-sage-500 mt-1 text-xl"></i>
+                            <div>
+                                <span class="font-bold text-sage-800">Keamanan dan Deteksi Kecurangan (Fraud
+                                    Detection):</span>
+                                Algoritma pemrosesan data secara langsung (real-time data processing) digunakan untuk
+                                memantau pola transaksi yang mencurigakan, sehingga potensi pembobolan akun atau
+                                penipuan finansial dapat dicegah sebelum terjadi.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-gears text-sage-500 mt-1 text-xl"></i>
+                            <div>
+                                <span class="font-bold text-sage-800">Otomatisasi Logika Bisnis:</span>
+                                Software engineering memungkinkan perhitungan suku bunga kompleks, simulasi pinjaman,
+                                hingga konversi mata uang asing dilakukan secara instan melalui sistem terintegrasi.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-chart-line text-sage-500 mt-1 text-xl"></i>
+                            <div>
+                                <span class="font-bold text-sage-800">Manajemen Logika Algoritmik:</span>
+                                Dalam pasar modal dan investasi, sistem informatika memungkinkan eksekusi perdagangan
+                                saham otomatis (algorithmic trading) yang beroperasi berdasarkan kriteria analitis yang
+                                presisi.
+                            </div>
+                        </li>
+                    </ul>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Pemanfaatan Data Besar (Big Data) untuk
+                        Pengambilan Keputusan</h3>
+                    <p>Selain pemrosesan transaksi harian, penerapan Data Science dan pengolahan data besar (big data)
+                        dalam informatika memungkinkan lembaga keuangan untuk memprediksi tren pasar dan melakukan
+                        penilaian risiko kredit (credit scoring) secara akurat. Sistem dapat menganalisis riwayat
+                        transaksi secara mendalam untuk menentukan kelayakan finansial seorang nasabah secara lebih
+                        cepat dan objektif dibandingkan metode konvensional.</p>
+                    <p>Dunia finance modern tidak dapat dipisahkan dari perkembangan ilmu informatika. Integrasi sistem
+                        informasi yang kuat, pemrosesan data yang handal, serta protokol keamanan jaringan yang ketat
+                        menjadi fondasi utama dalam menciptakan layanan keuangan yang transparan, efisien, dan
+                        tepercaya. Dengan terus berkembangnya inovasi teknologi informasi, sektor keuangan di Indonesia
+                        dipastikan akan terus bertransformasi ke arah yang lebih maju dan inklusif.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- HALAMAN 3: ARTIKEL INFORMATIKA -->
+        <!-- ========================================== -->
+        <div id="tugas-artikel-informatika" class="hidden">
+            <button onclick="kembaliKeMenu()"
+                class="inline-flex items-center gap-2 text-sage-700 font-bold mb-8 hover:text-sage-500">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Tugas
+            </button>
+            <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 relative">
+                <h1 class="text-3xl font-extrabold text-sage-800 mb-6 text-center font-playfair">Artikel:
+                    Informatika
+                </h1>
+                <!-- GANTI SRC DENGAN NAMA FILE FOTOMU -->
+                <div class="flex justify-center my-6">
+                    <img src="unnamed (7).jpg" alt="Informatika"
+                        class="w-full max-w-md rounded-xl shadow-md border border-gray-200 object-cover">
+                </div>
+                <div class="text-gray-700 leading-relaxed text-justify space-y-4">
+                    <p>Informatika merupakan bidang ilmu yang mempelajari dasar-dasar pengolahan informasi
+                        dengan
+                        memanfaatkan teknologi komputer. Pada dasarnya, informatika tidak hanya membahas tentang
+                        perangkat keras dan perangkat lunak, tetapi juga cara berpikir komputasional, logis,
+                        serta
+                        sistematis dalam menyelesaikan suatu permasalahan. Dasar informatika menjadi fondasi
+                        penting
+                        untuk memahami pemrograman, algoritma, jaringan komputer, hingga penerapan teknologi
+                        dalam
+                        kehidupan sehari-hari.</p>
+                    <p>Secara umum, informatika dapat diartikan sebagai ilmu yang membahas proses mengumpulkan,
+                        mengolah, menyimpan, dan menyebarkan informasi dengan bantuan komputer. Ilmu ini tidak
+                        hanya
+                        berhubungan dengan mesin, melainkan juga melibatkan manusia sebagai pengguna dan
+                        pencipta
+                        teknologi. Dengan mempelajari informatika, seseorang dapat memahami bagaimana teknologi
+                        dapat
+                        dimanfaatkan untuk mempermudah aktivitas dan menghasilkan inovasi baru.</p>
+                    <p>Informatika memiliki keterkaitan yang sangat erat dengan matematika. Hal ini karena
+                        matematika
+                        menyediakan dasar logika, struktur, dan konsep yang dibutuhkan dalam proses komputasi.
+                        Misalnya,
+                        sistem bilangan biner dan aljabar Boolean yang berasal dari matematika digunakan dalam
+                        pemrograman dan rangkaian logika komputer. Selain itu, algoritma dan teori graf dalam
+                        matematika
+                        juga banyak diterapkan dalam penyusunan program maupun analisis data. Oleh karena itu,
+                        matematika dapat dianggap sebagai pondasi penting yang menopang perkembangan
+                        informatika.</p>
+                    <p>Peran informatika sangat luas dan mencakup berbagai aspek kehidupan manusia. Dalam bidang
+                        pendidikan, informatika mempermudah proses belajar melalui e-learning dan akses
+                        informasi
+                        digital. Di bidang kesehatan, informatika mendukung pencatatan rekam medis, penelitian,
+                        serta
+                        diagnosis berbasis kecerdasan buatan. Pada bidang ekonomi, informatika mendorong
+                        perkembangan
+                        e-commerce, perbankan digital, dan sistem pembayaran online. Sementara dalam komunikasi,
+                        informatika memungkinkan manusia saling terhubung dengan cepat melalui media sosial dan
+                        berbagai
+                        platform digital. Dengan perannya yang begitu besar, informatika menjadi salah satu ilmu
+                        penting
+                        yang mendorong kemajuan peradaban di era modern ini.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- HALAMAN 4: SISTEM DIGITAL -->
+        <!-- ========================================== -->
+        <div id="tugas-sistem-digital" class="hidden">
+            <button onclick="kembaliKeMenu()"
+                class="inline-flex items-center gap-2 text-sage-700 font-bold mb-8 hover:text-sage-500">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Tugas
+            </button>
+
+            <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 relative">
+                <h1 class="text-3xl font-extrabold text-sage-800 mb-6 text-center font-playfair">Materi:
+                    Sistem
+                    Digital
+                </h1>
+                <!-- GANTI SRC DENGAN NAMA FILE FOTOMU -->
+                <div class="flex justify-center my-6">
+                    <img src="unnamed (8).jpg" alt="Ilustrasi Anekdot"
+                        class="w-full max-w-md rounded-xl shadow-md border border-gray-200 object-cover">
+                </div>
+                <div class="text-gray-700 leading-relaxed text-justify space-y-4">
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">APA ITU SISTEM DIGITAL?</h3>
+                    <p>Sistem digital adalah sistem yang bekerja dengan menggunakan data diskrit berupa
+                        angka
+                        atau
+                        simbol tertentu, biasanya direpresentasikan dalam bilangan biner (0 dan 1).
+                        Sistem ini
+                        berbeda
+                        dengan sistem analog yang menggunakan nilai kontinu (berubah-ubah secara halus).
+                    </p>
+                    <p>Pada sistem digital, semua informasi seperti teks, gambar, suara, dan video
+                        diubah
+                        menjadi bentuk
+                        bilangan biner agar dapat diproses oleh perangkat digital seperti komputer,
+                        laptop,
+                        smartphone,
+                        kalkulator, dan perangkat elektronik lainnya.</p>
+
+                    <div class="bg-sage-50 p-4 rounded-xl border border-sage-100 my-4">
+                        <p class="font-bold text-sage-800 mb-2">Angka 0 dan 1 dalam sistem digital
+                            mewakili
+                            kondisi:</p>
+                        <ul class="list-none space-y-2">
+                            <li><i class="fa-solid fa-circle-xmark text-red-500 mr-2"></i><strong>0</strong>
+                                &rarr;
+                                mati, tidak aktif, rendah (OFF)</li>
+                            <li><i class="fa-solid fa-circle-check text-green-500 mr-2"></i><strong>1</strong>
+                                &rarr;
+                                hidup, aktif, tinggi (ON)</li>
+                        </ul>
+                    </div>
+                    <p>Karena hanya memiliki dua kondisi, sistem digital lebih stabil, akurat, dan tahan
+                        terhadap
+                        gangguan dibandingkan sistem analog.</p>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Komponen Sistem Digital</h3>
+                    <p>Sistem digital terdiri dari beberapa komponen utama, antara lain:</p>
+                    <ul class="list-disc ml-6 space-y-2">
+                        <li><strong>Gerbang Logika (Logic Gates):</strong> Komponen dasar yang memproses
+                            input
+                            logika
+                            biner menjadi output tertentu. Contoh gerbang logika termasuk AND, OR, dan
+                            NOT.</li>
+                        <li><strong>Rangkaian Digital:</strong> Terdiri dari berbagai rangkaian logika
+                            yang
+                            melakukan
+                            fungsi tertentu, seperti penjumlahan dan pengurangan bilangan biner.</li>
+                        <li><strong>Perangkat Keras (Hardware):</strong> Termasuk unit pengolah pusat
+                            (CPU),
+                            memori, dan
+                            perangkat periferal seperti printer dan kamera digital.</li>
+                    </ul>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Manfaat Sistem Digital!</h3>
+                    <ul class="list-disc ml-6 space-y-2">
+                        <li><strong>Akurasi tinggi:</strong> Data digital lebih presisi karena tidak
+                            mudah
+                            terpengaruh
+                            oleh noise atau gangguan.</li>
+                        <li><strong>Mudah disimpan dan diproses:</strong> Data dapat disimpan dalam
+                            memori dan
+                            diproses
+                            dengan cepat.</li>
+                        <li><strong>Mudah dikirim dan digandakan:</strong> Data digital dapat dikirim
+                            melalui
+                            internet
+                            tanpa mengurangi kualitas.</li>
+                        <li><strong>Lebih tahan lama:</strong> Data digital tidak mudah rusak seperti
+                            kaset atau
+                            media
+                            analog.</li>
+                        <li><strong>Efisien dan fleksibel:</strong> Mudah dikembangkan dan disesuaikan
+                            dengan
+                            kebutuhan
+                            teknologi baru.</li>
+                    </ul>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Fungsi Sistem Digital!</h3>
+                    <ul class="list-disc ml-6 space-y-2">
+                        <li><strong>Pengolahan Data:</strong> Memungkinkan pengolahan data yang efisien
+                            dan
+                            akurat.</li>
+                        <li><strong>Penyimpanan Data:</strong> Data dapat disimpan dan diakses dengan
+                            mudah
+                            tanpa
+                            kehilangan kualitas.</li>
+                        <li><strong>Transmisi Data:</strong> Memungkinkan komunikasi data yang lebih
+                            baik dan
+                            lebih
+                            cepat dibandingkan dengan sistem analog.</li>
+                    </ul>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Cara kerja sistem digital:
+                    </h3>
+
+                    <h4 class="font-bold text-lg text-sage-800 mt-4 mb-1">A. Input</h4>
+                    <p>Input adalah data yang dimasukkan ke sistem digital, misalnya:</p>
+                    <ul class="list-disc ml-6 space-y-1">
+                        <li>Mengetik di keyboard</li>
+                        <li>Menekan tombol</li>
+                        <li>Suara melalui mikrofon</li>
+                        <li>Gambar dari kamera</li>
+                    </ul>
+                    <p>Data input ini kemudian diubah menjadi sinyal digital (0 dan 1).</p>
+
+                    <h4 class="font-bold text-lg text-sage-800 mt-4 mb-1">B. Proses</h4>
+                    <p>Data yang sudah dalam bentuk biner diproses oleh CPU (Central Processing Unit)
+                        atau
+                        rangkaian
+                        logika digital menggunakan:</p>
+                    <ul class="list-disc ml-6 space-y-1">
+                        <li>Gerbang logika (AND, OR, NOT, NAND, NOR, XOR)</li>
+                        <li>Operasi aritmatika dan logika</li>
+                        <li>Sistem bilangan (biner, oktal, desimal, heksadesimal)</li>
+                    </ul>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 mt-2 font-mono text-sm">
+                        Contoh: Bilangan biner 11101<br>
+                        = 16 + 8 + 4 + 0 + 1<br>
+                        = 29 (desimal)
+                    </div>
+
+                    <h4 class="font-bold text-lg text-sage-800 mt-4 mb-1">C. Penyimpanan</h4>
+                    <p>Data hasil proses dapat disimpan dalam:</p>
+                    <ul class="list-disc ml-6 space-y-1">
+                        <li>RAM (sementara)</li>
+                        <li>Harddisk / SSD</li>
+                        <li>Flashdisk</li>
+                        <li>Cloud storage</li>
+                    </ul>
+
+                    <h4 class="font-bold text-lg text-sage-800 mt-4 mb-1">D. Output (Keluaran)</h4>
+                    <p>Output adalah hasil yang ditampilkan ke pengguna, seperti:</p>
+                    <ul class="list-disc ml-6 space-y-1">
+                        <li>Tampilan di layar monitor</li>
+                        <li>Suara dari speaker</li>
+                        <li>Cetakan dari printer</li>
+                        <li>Lampu indikator menyala/mati</li>
+                    </ul>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-8 mb-2 border-t border-gray-200 pt-6">
+                        Pendapat;</h3>
+                    <p>Menurut M. Morris Mano dalam bukunya <em>Digital Design</em>, sistem digital
+                        adalah
+                        sistem yang
+                        bekerja menggunakan nilai diskrit dan direpresentasikan dalam bentuk bilangan
+                        biner. Ia
+                        menyatakan bahwa sistem digital memiliki keunggulan dalam hal ketelitian,
+                        keandalan, dan
+                        kemudahan dalam pemrosesan data, sehingga sangat cocok digunakan pada perangkat
+                        elektronik
+                        modern.</p>
+                    <p>Sementara itu, menurut R. P. Jain, sistem digital memungkinkan proses pengolahan
+                        informasi
+                        dilakukan dengan kecepatan tinggi dan tingkat kesalahan yang sangat rendah. Hal
+                        ini
+                        disebabkan
+                        oleh penggunaan logika biner yang hanya mengenal dua kondisi, yaitu 0 dan 1,
+                        sehingga
+                        sistem
+                        lebih stabil dibandingkan sistem analog.</p>
+                    <p>Menurut William Stallings, sistem digital merupakan dasar dari sistem komputer
+                        modern
+                        yang
+                        memungkinkan integrasi antara perangkat keras (hardware) dan perangkat lunak
+                        (software).
+                        Ia
+                        menekankan bahwa sistem digital berperan penting dalam perkembangan teknologi
+                        informasi
+                        dan
+                        komunikasi karena mampu mengolah data dalam jumlah besar secara efisien.</p>
+                    <div class="bg-sage-50 p-6 rounded-xl border border-sage-100 mt-4">
+                        <p class="font-bold text-sage-800 mb-2"><i
+                                class="fa-solid fa-quote-left mr-2 text-sage-400"></i>Menurut saya,</p>
+                        <p class="mb-2">Sistem digital merupakan fondasi utama perkembangan teknologi
+                            modern.
+                            Hampir
+                            seluruh aktivitas manusia saat ini bergantung pada sistem digital, mulai
+                            dari
+                            pendidikan,
+                            komunikasi, kesehatan, hingga hiburan.</p>
+                        <p class="mb-2">Keunggulan sistem digital yang akurat, cepat, dan efisien
+                            membuat
+                            pekerjaan
+                            manusia menjadi lebih mudah dan produktif. Namun, di sisi lain,
+                            ketergantungan
+                            terhadap
+                            sistem digital juga menuntut manusia untuk bijak dalam menggunakannya,
+                            terutama
+                            dalam
+                            menjaga keamanan data dan privasi.</p>
+                        <p>Dengan memahami sistem digital sejak dini, khususnya di bidang pendidikan
+                            informatika, kita
+                            dapat lebih siap menghadapi perkembangan teknologi di masa depan dan
+                            memanfaatkannya
+                            secara
+                            positif.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- HALAMAN 5: KRIPTOGRAFI -->
+        <!-- ========================================== -->
+        <div id="tugas-kriptografi" class="hidden">
+            <button onclick="kembaliKeMenu()"
+                class="inline-flex items-center gap-2 text-sage-700 font-bold mb-8 hover:text-sage-500">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Tugas
+            </button>
+            <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 relative">
+                <h1 class="text-3xl font-extrabold text-sage-800 mb-6 text-center font-playfair">Materi:
+                    Kriptografi
+                </h1>
+                <div class="text-gray-700 leading-relaxed text-justify space-y-4">
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Kriptografi: Seni
+                        Menyembunyikan
+                        Informasi
+                    </h3>
+                    <p>Kata kriptografi mungkin terdengar asing buat sebagian orang, tapi sebenarnya
+                        kita ketemu
+                        kriptografi hampir setiap hari. Mulai dari login akun, chatting di WhatsApp,
+                        sampai
+                        browsing
+                        pakai HTTPS. Bahkan istilah yang lagi populer seperti cryptocurrency juga
+                        berakar dari
+                        konsep
+                        ini.</p>
+                    <p>Secara sederhana, kriptografi adalah ilmu untuk menyembunyikan informasi.
+                        Informasi yang
+                        awalnya
+                        bisa dibaca (plaintext) diubah dengan algoritma tertentu menjadi bentuk yang
+                        tidak bisa
+                        dipahami
+                        (ciphertext). Tanpa kunci yang tepat, pesan ini sangat sulit—bahkan hampir
+                        mustahil—untuk
+                        dipecahkan.</p>
+                    <p>Menariknya, kriptografi bukanlah teknologi baru. Ia sudah ada jauh sebelum
+                        komputer
+                        diciptakan.
+                    </p>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Awal Mula Kriptografi: Dari
+                        Medan
+                        Perang</h3>
+                    <p>Salah satu kisah kriptografi paling terkenal datang dari Julius Caesar, seorang
+                        jenderal
+                        Romawi.
+                        Saat itu, pesan perintah militernya sering dicegat musuh. Agar tidak kecolongan
+                        lagi,
+                        Caesar
+                        mengubah pesannya dengan cara sederhana: menggeser setiap huruf tiga langkah ke
+                        depan
+                        dalam
+                        alfabet.</p>
+                    <p>Contohnya, huruf B digeser tiga langkah menjadi E, E menjadi H, dan seterusnya.
+                        Hasilnya,
+                        pesan
+                        terlihat seperti kumpulan huruf aneh yang membingungkan musuh. Metode ini
+                        kemudian
+                        dikenal
+                        sebagai Caesar Cipher, salah satu teknik enkripsi tertua dalam sejarah.</p>
+                    <p>Walaupun sederhana, metode ini sangat efektif pada zamannya karena banyak orang
+                        masih
+                        buta huruf.
+                        Namun sekarang, Caesar Cipher mudah dipecahkan karena hanya memiliki 26
+                        kemungkinan
+                        kunci.
+                        Penyadap cukup mencoba semuanya (brute force) sampai menemukan pesan asli.</p>
+                    <!-- GANTI SRC DENGAN NAMA FILE FOTOMU -->
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 my-6">
+                        <img src="unnamed (2).jpg" alt="Caesar Cipher"
+                            class="w-full sm:w-1/2 max-w-xs rounded-xl shadow-md border border-gray-200 object-cover">
+                        <img src="unnamed (3).jpg" alt="Caesar Cipher 2"
+                            class="w-full sm:w-1/2 max-w-xs rounded-xl shadow-md border border-gray-200 object-cover">
+                    </div>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Scytale: Kriptografi Bangsa
+                        Sparta
+                    </h3>
+                    <div class="flex justify-center my-4">
+                        <img src="unnamed (4).jpg" alt="Scytale Sparta"
+                            class="w-full max-w-sm rounded-xl shadow-md border border-gray-200 object-cover">
+                    </div>
+                    <p>Jauh sebelum Caesar, bangsa Sparta sudah menggunakan alat bernama Scytale. Alat
+                        ini
+                        berupa
+                        tongkat kayu dengan diameter tertentu dan selembar kulit panjang.</p>
+                    <p>Caranya:</p>
+                    <ol class="list-decimal ml-6 space-y-1">
+                        <li>Kulit dililitkan ke tongkat membentuk spiral.</li>
+                        <li>Pesan ditulis secara lurus di atas kulit.</li>
+                        <li>Saat kulit dilepas, tulisan menjadi acak dan tidak terbaca.</li>
+                    </ol>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Telegram Zimmerman (Perang
+                        Dunia I)
+                    </h3>
+                    <div class="flex justify-center my-4">
+                        <img src="unnamed (5).jpg" alt="Telegram Zimmerman"
+                            class="w-full max-w-sm rounded-xl shadow-md border border-gray-200 object-cover">
+                    </div>
+                    <p>Pada tahun 1917, dunia menyadari betapa pentingnya kriptografi lewat Telegram
+                        Zimmerman.
+                        Ini
+                        adalah pesan rahasia Jerman ke Meksiko yang berisi ajakan aliansi melawan
+                        Amerika
+                        Serikat.
+                        Sebagai imbalan, Jerman menjanjikan wilayah seperti Texas dan Arizona.</p>
+                    <p>Pesan ini berhasil dipecahkan oleh unit pemecah kode Inggris, Room 40. Ketika
+                        Amerika
+                        mengetahui
+                        isi pesan tersebut, kemarahan publik meningkat dan menjadi salah satu alasan
+                        Amerika
+                        Serikat
+                        ikut terjun ke Perang Dunia I.</p>
+                    <p>Satu sandi yang bocor bisa mengubah sejarah sebuah negara.</p>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Mesin Enigma (Perang Dunia II)
+                    </h3>
+                    <div class="flex justify-center my-4">
+                        <img src="unnamed (6).jpg" alt="Mesin Enigma"
+                            class="w-full max-w-sm rounded-xl shadow-md border border-gray-200 object-cover">
+                    </div>
+                    <p>Belajar dari kesalahan, Jerman di Perang Dunia II menggunakan mesin Enigma, mesin
+                        enkripsi
+                        elektromekanis yang sangat kompleks. Dengan lebih dari 150 triliun kemungkinan
+                        pengaturan,
+                        Enigma dianggap tidak mungkin dipecahkan.</p>
+                    <p>Namun, di Bletchley Park, Alan Turing dan timnya berhasil membuat mesin bernama
+                        Bombe
+                        untuk
+                        memecahkan sandi Enigma. Hasilnya, Inggris bisa membaca komunikasi rahasia
+                        Jerman,
+                        menghindari
+                        serangan kapal selam, dan memenangkan banyak pertempuran penting.</p>
+                    <p>Ini membuktikan satu hal: Tidak ada enkripsi buatan manusia yang benar-benar
+                        kebal
+                        selamanya.</p>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">One-Time Pad</h3>
+                    <div class="flex justify-center my-4">
+                        <img src="c:\Users\chhcp\OneDrive\Pictures\unnamed (9).jpg" alt="One-Time Pad"
+                            class="w-full max-w-sm rounded-xl shadow-md border border-gray-200 object-cover">
+                    </div>
+                    <p>One-Time Pad (OTP) adalah metode enkripsi yang secara teori tidak bisa
+                        dipecahkan. Pesan
+                        dan
+                        kunci diubah menjadi angka, lalu dijumlahkan untuk menghasilkan ciphertext.
+                        Untuk
+                        mendekripsi,
+                        prosesnya cukup dibalik dengan pengurangan. Keamanan OTP berasal dari kunci yang
+                        benar-benar
+                        acak, panjang kunci yang sama dengan pesan, dan kunci yang hanya digunakan satu
+                        kali.
+                        Namun,
+                        metode ini jarang dipakai karena sulitnya mendistribusikan kunci rahasia secara
+                        aman.
+                    </p>
+                    <p>Masalah distribusi kunci akhirnya teratasi pada tahun 1976 melalui konsep public
+                        key
+                        cryptography
+                        yang diperkenalkan oleh Whitfield Diffie dan Martin Hellman. Mereka mengusulkan
+                        penggunaan dua
+                        kunci: private key yang hanya diketahui pemiliknya dan public key yang bisa
+                        diketahui
+                        semua
+                        orang. Dengan bantuan perhitungan matematika menggunakan bilangan besar dan
+                        modulo
+                        bilangan
+                        prima, dua pihak dapat membentuk kunci rahasia bersama tanpa pernah mengirimkan
+                        kunci
+                        tersebut
+                        secara langsung.</p>
+                    <p>Konsep Diffie–Hellman menjadi dasar sistem keamanan digital modern. Teknologi ini
+                        digunakan dalam
+                        HTTPS, end-to-end encryption pada aplikasi pesan, VPN, dan berbagai sistem
+                        keamanan
+                        jaringan
+                        lainnya. Saat pengguna melihat ikon gembok di browser, itu menandakan koneksi
+                        telah
+                        dilindungi
+                        oleh enkripsi berbasis prinsip ini.</p>
+                    <p>Sebagai penutup, kriptografi kini tidak hanya digunakan untuk kepentingan
+                        militer, tetapi
+                        juga
+                        untuk melindungi data dan privasi pribadi. Meski kemunculan komputer kuantum
+                        berpotensi
+                        mengancam metode enkripsi saat ini, kriptografi akan terus berkembang mengikuti
+                        tantangan zaman.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- HALAMAN 6: ANALISIS FILM -->
+        <!-- ========================================== -->
+        <div id="tugas-imitation-game" class="hidden">
+            <button onclick="kembaliKeMenu()"
+                class="inline-flex items-center gap-2 text-sage-700 font-bold mb-8 hover:text-sage-500">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Tugas
+            </button>
+            <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 relative">
+                <h1 class="text-3xl font-extrabold text-sage-800 mb-6 text-center font-playfair">
+                    Analisis Film:
+                    The
+                    Imitation Game</h1>
+                <div class="flex justify-center my-6">
+                    <img src="unnamed (1).jpg" alt="The Imitation Game"
+                        class="w-full max-w-md rounded-xl shadow-md border border-gray-200 object-cover">
+                </div>
+                <div class="text-gray-700 leading-relaxed text-justify space-y-4">
+                    <p>Film <em>The Imitation Game</em> menceritakan perjalanan Alan Turing, seorang
+                        matematikawan
+                        Inggris yang direkrut untuk memecahkan sandi rahasia Jerman bernama Enigma pada
+                        masa
+                        Perang
+                        Dunia II.</p>
+                    <p>Tokoh Alan Turing digambarkan sebagai pribadi yang sangat cerdas tapi sulit
+                        berkomunikasi
+                        dengan
+                        orang lain. Ia lebih percaya pada logika daripada perasaan, lalu sering
+                        bertentangan
+                        dengan
+                        rekan satu timnya di Bletchley Park. Film bukan hanya bagaimana memecahkan
+                        Enigma,
+                        tetapi juga
+                        bagaimana Turing berjuang agar idenya diterima, terlebih dimana adegan ketika ia
+                        memutuskan
+                        membangun mesin pemecah kode.</p>
+                    <p>Lalu ada bagian dimana setelah berhasil membaca pesan Jerman, tim tidak bisa
+                        langsung
+                        menyelamatkan semua target karena takut musuh menyadari bahwa Enigma telah
+                        ditembus.
+                        Bagian ini
+                        membuat penonton memahami bahwa ilmu pengetahuan sering berhadapan dengan
+                        pilihan sulit
+                        antara
+                        kemanusiaan dan strategi.</p>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Korelasi dengan Kriptografi
+                    </h3>
+
+                    <h4 class="font-bold text-lg text-sage-800 mt-4 mb-1">1. Mesin Enigma sebagai Alat
+                        Enkripsi
+                    </h4>
+                    <p>Enigma adalah mesin elektromekanik yang berfungsi mengubah pesan biasa menjadi
+                        pesan
+                        tersandi.
+                        Cara kerjanya menggunakan beberapa komponen:</p>
+                    <ul class="list-disc ml-6 space-y-1">
+                        <li>Rotor berputar, yang mengacak huruf setiap kali tombol ditekan</li>
+                        <li>Plugboard, yang menukar pasangan huruf untuk menambah tingkat kerumitan</li>
+                        <li>Kunci harian, yaitu pengaturan awal mesin yang berubah setiap hari</li>
+                    </ul>
+                    <p>Karena kombinasi rotor dan plugboard sangat banyak, Enigma menghasilkan jutaan
+                        kemungkinan sandi.
+                        Dalam film diperlihatkan bahwa tanpa mengetahui pengaturan awal mesin, pesan
+                        seperti
+                        “serang
+                        besok pagi” bisa berubah menjadi deretan huruf yang sama sekali tidak bermakna.
+                        Inilah
+                        contoh
+                        nyata fungsi alat kriptografi: menjaga kerahasiaan informasi agar hanya pengirim
+                        dan
+                        penerima
+                        yang bisa memahaminya.</p>
+
+                    <h4 class="font-bold text-lg text-sage-800 mt-4 mb-1">2. Mesin Bombe/Christopher
+                        sebagai
+                        Alat
+                        Kriptanalisis</h4>
+                    <p>Untuk melawan Enigma, Turing tidak menggunakan cara manual, melainkan menciptakan
+                        mesin
+                        pemecah
+                        kode yang dalam film dinamai Christopher, dan dalam sejarah dikenal sebagai
+                        Bombe. Alat
+                        ini
+                        bekerja dengan prinsip:</p>
+                    <ul class="list-disc ml-6 space-y-1">
+                        <li>mencoba banyak kemungkinan kunci secara otomatis</li>
+                        <li>mencocokkan hasilnya dengan pola bahasa Jerman</li>
+                        <li>mengeliminasi kombinasi yang tidak mungkin</li>
+                    </ul>
+                    <p>Mesin ini dapat melakukan pekerjaan yang tidak sanggup dilakukan manusia karena
+                        kecepatan
+                        dan
+                        ketelitiannya. Dari sini terlihat bahwa kriptografi membutuhkan perangkat keras
+                        selain
+                        kemampuan
+                        berpikir. Christopher dapat dianggap sebagai bentuk awal komputer yang dirancang
+                        khusus
+                        untuk
+                        memecahkan masalah kriptografi.</p>
+
+                    <h4 class="font-bold text-lg text-sage-800 mt-4 mb-1">3. Hubungan dengan Alat
+                        Kriptografi
+                        Modern
+                    </h4>
+                    <p>Alat-alat dalam film memiliki kesamaan fungsi dengan teknologi yang kita gunakan
+                        saat
+                        ini, antara
+                        lain:</p>
+                    <ul class="list-disc ml-6 space-y-1">
+                        <li>Enigma &approx; aplikasi enkripsi modern yang mengamankan pesan chat dan
+                            email</li>
+                        <li>Bombe &approx; komputer yang menjalankan algoritma dekripsi atau keamanan
+                            siber</li>
+                        <li>kunci harian Enigma &approx; password, PIN, atau private key pada sistem
+                            digital
+                        </li>
+                    </ul>
+                    <p>Artinya, walaupun bentuknya berbeda, prinsip alat kriptografi tidak berubah: ada
+                        perangkat untuk
+                        mengunci informasi dan ada perangkat untuk membuka atau mengujinya.</p>
+
+                    <h3 class="font-bold text-xl text-sage-700 mt-6 mb-2">Kesimpulan</h3>
+                    <p>Dari analisis film <em>The Imitation Game</em>, dapat dipahami bahwa keberhasilan
+                        memecahkan
+                        Enigma merupakan hasil perpaduan antara logika matematika, kreativitas
+                        teknologi, dan
+                        ketekunan
+                        manusia. Film ini menggambarkan secara jelas bagaimana proses enkripsi–dekripsi,
+                        pencarian pola,
+                        serta penggunaan mesin menjadi inti dari kriptografi.</p>
+                    <p>Korelasi film dengan kriptografi terlihat pada cara pesan disandikan, upaya
+                        kriptanalisis
+                        yang
+                        dilakukan Turing, dan penggunaan mesin sebagai alat komputasi. Semua itu sejalan
+                        dengan
+                        konsep
+                        keamanan informasi yang dipelajari saat ini.</p>
+                    <p>Melalui film ini aku menyimpulkan bahwa kriptografi memiliki peran besar dalam
+                        sejarah
+                        dan
+                        perkembangan teknologi modern. Tanpa pemecahan Enigma, jalannya perang mungkin
+                        berbeda,
+                        dan
+                        tanpa gagasan Turing, komputer serta sistem enkripsi masa kini mungkin tidak
+                        akan
+                        berkembang
+                        secepat sekarang. Film ini mengajarkan bahwa melindungi informasi adalah bagian
+                        penting
+                        dari
+                        kehidupan manusia, baik di masa perang maupun di era digital.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- HALAMAN 7: VIBE CODING                     -->
+        <!-- ========================================== -->
+        <div id="tugas-vibe-coding" class="hidden">
+            <!-- Tombol Navigasi Kembali -->
+            <button onclick="kembaliKeMenu()"
+                class="inline-flex items-center gap-2 text-sage-700 font-bold mb-8 hover:text-sage-500 transition-colors duration-200">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Tugas
+            </button>
+
+            <!-- Kartu Artikel Utama -->
+            <article
+                class="bg-white p-6 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-slate-100 relative max-w-4xl mx-auto">
+
+                <!-- Category Tag / Header Meta -->
+                <div class="flex items-center gap-3 text-xs font-semibold text-sage-700 uppercase tracking-wider mb-4">
+                    <span class="bg-sage-100 px-3 py-1 rounded-full"><i class="fa-solid fa-newspaper mr-1"></i> Artikel
+                        Berita</span>
+                    <span>•</span>
+                    <span>Teknologi &amp; AI</span>
+                </div>
+
+                <!-- Judul Artikel -->
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-sage-800 mb-5 font-serif leading-tight">
+                    Fenomena Vibe Coding
+                </h1>
+
+                <!-- Penulis / Meta Info -->
+                <div
+                    class="flex flex-wrap items-center gap-4 border-b border-slate-100 pb-6 mb-8 text-sm text-slate-500">
+                    <div
+                        class="w-10 h-10 rounded-full bg-sage-200 flex items-center justify-center font-bold text-sage-800">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-800">Chelsea Catherine Pangestu</p>
+                        <p class="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
+                            <i class="fa-regular fa-calendar"></i> 6 Agustus 2026 &nbsp;•&nbsp; Jakarta
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Lead Paragraph (JAKARTA) -->
+                <p class="text-slate-700 leading-relaxed text-base mb-8 text-justify">
+                    <span class="font-bold text-sage-700 text-lg"> Dunia pengembangan perangkat lunak sedang mengalami
+                        pergeseran paradigma yang cukup signifikan. Jika beberapa tahun lalu aktivitas membuat aplikasi
+                        identik dengan baris-baris kode rumit, sintaksis yang ketat, dan jam kerja panjang di depan
+                        <em>text editor</em>, kini hadir gaya baru bernama <strong>Vibe Coding</strong>.
+                </p>
+                <p class="text-slate-600 leading-relaxed text-base mb-10 text-justify">
+                    Istilah ini mengacu pada proses pembuatan program yang mengandalkan asisten kecerdasan buatan
+                    (<em>Artificial Intelligence</em>/AI) sebagai juru ketik utama. Pengembang tidak lagi menulis setiap
+                    baris kode dari nol, melainkan bertindak sebagai pengarah yang memberikan instruksi dalam bahasa
+                    sehari-hari.
+                </p>
+
+                <!-- Section 1: Dari Pengetik Kode Menjadi Pengarah Kreatif -->
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-sage-700 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sage-500"></i> Dari Pengetik Kode Menjadi
+                        Pengarah Kreatif
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-base mb-4 text-justify">
+                        Secara teknis, vibe coding memanfaatkan model bahasa besar (<em>Large Language Models</em>) yang
+                        terintegrasi dengan alat bantu pemrograman seperti <strong>Cursor</strong>,
+                        <strong>Claude</strong>, atau <strong>ChatGPT</strong>. Proses pengembangan aplikasi pun berubah
+                        menjadi dialog interaktif.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed text-base mb-4 text-justify">
+                        Pengembang cukup menyampaikan konsep yang diinginkan—misalnya, <em>"Buatkan dasbor analisis data
+                            penjualan bulanan dengan grafik batang dan fitur ekspor PDF."</em> AI kemudian akan langsung
+                        memproses instruksi tersebut dan menghasilkan kode program secara utuh. Jika terjadi kendala
+                        atau <em>error</em>, pengembang cukup mengunggah pesan kesalahan tersebut kembali ke AI untuk
+                        diperbaiki otomatis.
+                    </p>
+
+                    <!-- Info box highlight -->
+                    <div class="bg-sage-50 border-l-4 border-sage-400 p-5 rounded-r-xl my-6 text-slate-700">
+                        <p class="text-sm leading-relaxed">
+                            <i class="fa-solid fa-lightbulb text-sage-500 mr-2"></i>
+                            Pendekatan ini mengubah fokus utama dalam pembuatan aplikasi. <strong>Kreativitas, pemahaman
+                                alur bisnis, serta desain pengalaman pengguna (<em>user experience</em>)</strong> kini
+                            memegang peranan lebih vital ketimbang sekadar hafalan terhadap sintaksis pemrograman.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Section 2: Akselerasi Inovasi dan Aksesibilitas -->
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-sage-700 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-rocket text-sage-500"></i> Akselerasi Inovasi dan Aksesibilitas
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-base mb-5 text-justify">
+                        Popularitas vibe coding didorong oleh dua faktor utama: <strong>kecepatan</strong> dan
+                        <strong>aksesibilitas</strong>.
+                    </p>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <!-- Card 1 -->
+                        <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 flex gap-4 items-start">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center">
+                                <i class="fa-solid fa-bolt text-white text-base"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-emerald-900 mb-1">Pengembangan Cepat</h3>
+                                <p class="text-xs text-emerald-800 leading-relaxed">Ide yang sebelumnya membutuhkan
+                                    waktu berminggu-minggu untuk dibuatkan versi awal (<em>prototype</em>), kini dapat
+                                    terwujud dalam hitungan hari bahkan jam.</p>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="bg-sky-50 border border-sky-100 rounded-2xl p-5 flex gap-4 items-start">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center">
+                                <i class="fa-solid fa-globe text-white text-base"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sky-900 mb-1">Demokratisasi Teknologi</h3>
+                                <p class="text-xs text-sky-800 leading-relaxed">Batasan teknis bagi individu non-IT kian
+                                    menipis. Pendiri startup, desainer, hingga pengusaha mandiri kini dapat
+                                    merealisasikan produk digital mereka sendiri.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Risiko dan Tantangan Teknis -->
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-sage-700 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-sage-500"></i> Risiko dan Tantangan Teknis
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-base mb-5 text-justify">
+                        Meski menawarkan efisiensi tinggi, sejumlah praktisi teknologi mengingatkan adanya risiko jika
+                        vibe coding diterapkan tanpa pemahaman mendasar.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex gap-4 items-start bg-rose-50/70 border border-rose-100 rounded-xl p-4">
+                            <i class="fa-solid fa-lock-open text-rose-500 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-bold text-rose-900 text-sm mb-0.5">Celah Keamanan</p>
+                                <p class="text-xs text-rose-800 leading-relaxed">Kode yang dihasilkan oleh AI tidak
+                                    selalu mematuhi standar keamanan terbaik secara otomatis. Tanpa pemeriksaan manual,
+                                    aplikasi berisiko memiliki celah kerentanan.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start bg-amber-50/70 border border-amber-100 rounded-xl p-4">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-bold text-amber-900 text-sm mb-0.5">Kerapuhan Arsitektur (Technical Debt)
+                                </p>
+                                <p class="text-xs text-amber-800 leading-relaxed">Aplikasi yang dibangun sepenuhnya dari
+                                    instruksi AI tanpa perencanaan struktur yang matang sering kali sulit dirawat
+                                    (<em>maintainability</em>) ketika skalanya membesar.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start bg-purple-50/70 border border-purple-100 rounded-xl p-4">
+                            <i class="fa-solid fa-brain text-purple-500 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-bold text-purple-900 text-sm mb-0.5">Ketergantungan Logika</p>
+                                <p class="text-xs text-purple-800 leading-relaxed">Kemampuan pemecahan masalah secara
+                                    mendalam tetap membutuhkan pemahaman logika pemrograman dasar. Tanpa hal tersebut,
+                                    pengembang akan kesulitan melakukan <em>debugging</em> pada masalah yang kompleks.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Masa Depan Industri Pemrograman -->
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-sage-700 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-sage-500"></i> Masa Depan Industri Pemrograman
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-base mb-4 text-justify">
+                        Vibe coding bukanlah pertanda berakhirnya profesi insinyur perangkat lunak (<em>software
+                            engineer</em>). Sebaliknya, fenomena ini memperlihatkan evolusi alat kerja dalam industri
+                        IT. Pemrogram profesional yang menggabungkan logika mendalam dengan efisiensi vibe coding justru
+                        berpotensi menghasilkan karya secara jauh lebih produktif.
+                    </p>
+                    <!-- Penutup / closing quote style -->
+                    <div class="bg-sage-800 text-white rounded-2xl p-6 mt-6">
+                        <i class="fa-solid fa-quote-left text-sage-400 text-3xl mb-3 block"></i>
+                        <p class="text-base leading-relaxed text-sage-100 text-justify">
+                            Pada akhirnya, vibe coding membuktikan bahwa di era modern, batasan antara sebuah gagasan
+                            dan wujud digitalnya menjadi makin tipis. Masa depan pembuatan teknologi tidak lagi hanya
+                            milik mereka yang mahir mengetik kode, tetapi milik siapa saja yang memiliki ide jelas dan
+                            mampu mengarahkannya dengan tepat.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 5. Video YouTube: Vibe Coding -->
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-sage-700 mb-4 flex items-center gap-2">
+                        <i class="fa-brands fa-youtube text-rose-500"></i> Tonton: Apa Itu Vibe Coding?
+                    </h2>
+                    <p class="text-slate-500 text-sm mb-5">Pelajari lebih dalam tentang konsep Vibe Coding melalui video
+                        berikut ini.</p>
+
+                    <!-- Video Player Card -->
+                    <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-black group cursor-pointer"
+                        id="yt-vibe-container" onclick="loadYouTubeVideo()" style="aspect-ratio: 16/9;">
+
+                        <!-- Thumbnail -->
+                        <img id="yt-vibe-thumbnail" src="https://img.youtube.com/vi/LsI20I6M92c/maxresdefault.jpg"
+                            alt="Thumbnail video Vibe Coding"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            onerror="this.src='https://img.youtube.com/vi/LsI20I6M92c/hqdefault.jpg'">
+
+                        <!-- Dark overlay -->
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-all duration-300">
+                        </div>
+
+                        <!-- Play Button -->
+                        <div id="yt-vibe-play-btn"
+                            class="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                            <div class="w-18 h-18 rounded-full bg-rose-600 hover:bg-rose-500 transition-all duration-300 flex items-center justify-center shadow-2xl group-hover:scale-110"
+                                style="width:72px;height:72px;">
+                                <i class="fa-solid fa-play text-white text-2xl ml-1"></i>
+                            </div>
+                            <span
+                                class="text-white font-semibold text-sm bg-black/50 px-4 py-1 rounded-full backdrop-blur-sm tracking-wide">
+                                Putar Video
+                            </span>
+                        </div>
+
+                        <!-- YouTube iframe (hidden until clicked) -->
+                        <iframe id="yt-vibe-iframe" class="hidden w-full h-full absolute inset-0" src=""
+                            title="Vibe Coding - YouTube Video" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <!-- Tautan eksternal -->
+                    <div class="mt-3 flex items-center justify-between">
+                        <p class="text-xs text-slate-400"><i class="fa-brands fa-youtube text-rose-400 mr-1"></i> Video
+                            dari YouTube</p>
+                        <a href="https://youtu.be/LsI20I6M92c?si=jej_SX_nTwao4pkZ" target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-xs font-semibold text-rose-600 hover:text-rose-700 transition-colors group">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            Buka di YouTube
+                        </a>
+                    </div>
+                </section>
+
+                <script>
+                    function loadYouTubeVideo() {
+                        var container = document.getElementById('yt-vibe-container');
+                        var iframe = document.getElementById('yt-vibe-iframe');
+                        var thumbnail = document.getElementById('yt-vibe-thumbnail');
+                        var playBtn = document.getElementById('yt-vibe-play-btn');
+
+                        if (iframe.classList.contains('hidden')) {
+                            iframe.src = 'https://www.youtube.com/embed/LsI20I6M92c?autoplay=1&rel=0';
+                            iframe.classList.remove('hidden');
+                            thumbnail.classList.add('hidden');
+                            playBtn.classList.add('hidden');
+                            container.style.cursor = 'default';
+                        }
+                    }
+                </script>
+
+            </article>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- HALAMAN INTERAKTIF: BINARY CODE & Virtual Pet -->
+        <!-- ========================================== -->
+        <div class="space-y-6">
+
+            <!-- ========================================== -->
+            <!-- FITUR INTERAKTIF 1: BINARY CODE BREAKER -->
+            <!-- ========================================== -->
+            <div id="tugas-game-binary" class="hidden">
+                <a href="javascript:void(0)" onclick="kembaliKeMenu()"
+                    class="inline-flex items-center gap-2 text-sage-700 font-bold mb-6 hover:text-sage-500 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Informatika
+                </a>
+
+                <div
+                    class="glass p-6 md:p-8 rounded-3xl border border-emerald-300 bg-slate-900 text-white shadow-2xl relative overflow-hidden">
+                    <div
+                        class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6 border-b border-slate-700 pb-4">
+                        <div>
+                            <h2 class="text-3xl font-extrabold text-emerald-400 font-playfair flex items-center gap-3">
+                                <i class="fa-solid fa-terminal"></i> Binary Code Breaker 🔓
+                            </h2>
+                            <p class="text-slate-400 text-xs mt-1">Konversikan kode biner ke
+                                angka
+                                desimal sesegera
+                                mungkin sebelum waktu habis!</p>
+                        </div>
+
+                        <!-- Scoreboard -->
+                        <div
+                            class="flex items-center gap-4 bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700 text-sm">
+                            <div>Skor: <span id="bin-score" class="text-emerald-400 font-bold text-lg">0</span>
+                            </div>
+                            <div>Waktu: <span id="bin-timer" class="text-rose-400 font-bold text-lg">30</span>s
+                            </div>
+                            <div>High: <span id="bin-highscore" class="text-amber-400 font-bold text-lg">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game Play Area -->
+                    <div
+                        class="flex flex-col items-center justify-center py-8 bg-slate-950/60 rounded-2xl border border-slate-800 relative">
+                        <span class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-2">Kode
+                            Biner
+                            Target</span>
+                        <div id="bin-target"
+                            class="text-4xl md:text-6xl font-mono font-black text-emerald-400 tracking-widest mb-6 animate-pulse">
+                            0000 1010
+                        </div>
+
+                        <div class="flex items-center gap-3 w-full max-w-sm px-4">
+                            <input id="bin-input" type="number" placeholder="Masukkan Angka Desimal" autofocus
+                                class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-emerald-300 text-center text-xl font-bold focus:outline-none focus:border-emerald-400"
+                                onkeypress="if(event.key === 'Enter') checkBinaryAnswer()">
+                            <button onclick="checkBinaryAnswer()"
+                                class="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-sm shadow-lg transition-transform active:scale-95">
+                                DEKRIPSI
+                            </button>
+                        </div>
+
+                        <p id="bin-feedback" class="mt-4 text-xs font-bold text-slate-400 min-h-[20px]">Klik
+                            Mulai
+                            untuk memulai game!</p>
+
+                        <button id="bin-start-btn" onclick="startBinaryGame()"
+                            class="mt-4 px-8 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-sm shadow-xl hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-play mr-2"></i> Mulai Game Dekripsi
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- FITUR INTERAKTIF 2: SPEED CODE TYPER -->
+            <!-- ========================================== -->
+            <div id="tugas-game-typer" class="hidden">
+                <a href="javascript:void(0)" onclick="kembaliKeMenu()"
+                    class="inline-flex items-center gap-2 text-sage-700 font-bold mb-6 hover:text-sage-500 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Informatika
+                </a>
+
+                <div
+                    class="glass p-6 md:p-8 rounded-3xl border border-indigo-200 bg-white/90 dark:bg-slate-800 shadow-xl">
+                    <div
+                        class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6 border-b border-indigo-100 pb-4">
+                        <div>
+                            <h2
+                                class="text-3xl font-extrabold text-indigo-900 dark:text-indigo-300 font-playfair flex items-center gap-3">
+                                <i class="fa-solid fa-keyboard"></i> Speed Code Typer ⌨️
+                            </h2>
+                            <p class="text-gray-500 dark:text-gray-300 text-xs mt-1">Uji
+                                kecepatan
+                                mengetik dan
+                                ketelitian Anda pada kutipan pemrograman & sains komputer!
+                            </p>
+                        </div>
+
+                        <div
+                            class="flex items-center gap-4 bg-indigo-50 dark:bg-slate-700 px-4 py-2 rounded-2xl text-sm font-bold text-indigo-900 dark:text-indigo-200">
+                            <div>WPM: <span id="type-wpm" class="text-indigo-600 dark:text-indigo-400 text-lg">0</span>
+                            </div>
+                            <div>Akurasi: <span id="type-acc"
+                                    class="text-emerald-600 dark:text-emerald-400 text-lg">100%</span>
+                            </div>
+                            <div>Waktu: <span id="type-timer"
+                                    class="text-purple-600 dark:text-purple-400 text-lg">30</span>s
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote Box -->
+                    <div id="type-quote-box"
+                        class="p-5 rounded-2xl bg-indigo-50/70 dark:bg-slate-900 border border-indigo-100 font-mono text-base md:text-lg text-gray-700 dark:text-gray-200 leading-relaxed mb-4 select-none">
+                        Tekan tombol Mulai untuk mendapatkan teks tantangan mengetik!
+                    </div>
+
+                    <textarea id="type-input" rows="3" disabled
+                        placeholder="Ketik teks di atas di sini secara persis..."
+                        class="w-full p-4 rounded-2xl border border-indigo-200 dark:bg-slate-900 dark:text-white font-mono text-base focus:outline-none focus:border-indigo-500 mb-4 transition-all"
+                        oninput="handleTypingInput()"></textarea>
+
+                    <div class="flex items-center justify-between">
+                        <button id="type-start-btn" onclick="startTypingGame()"
+                            class="px-6 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md transition-transform hover:scale-105">
+                            <i class="fa-solid fa-play mr-2"></i> Mulai Tantangan Mengetik
+                        </button>
+                        <span id="type-badge" class="text-xs font-bold text-indigo-600 dark:text-indigo-300">Level:
+                            Pemula</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- FITUR INTERAKTIF 3: SIMULATOR KRIPTOGRAFI -->
+            <!-- ========================================== -->
+            <div id="tugas-tool-cipher" class="hidden">
+                <a href="javascript:void(0)" onclick="kembaliKeMenu()"
+                    class="inline-flex items-center gap-2 text-sage-700 font-bold mb-6 hover:text-sage-500 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Informatika
+                </a>
+
+                <div
+                    class="glass p-6 md:p-8 rounded-3xl border border-amber-200 bg-white/90 dark:bg-slate-800 shadow-xl">
+                    <h2
+                        class="text-3xl font-extrabold text-amber-900 dark:text-amber-300 font-playfair mb-2 flex items-center gap-3">
+                        <i class="fa-solid fa-user-secret"></i> Simulator Kriptografi &
+                        Cipher
+                        🕵️‍♂️
+                    </h2>
+                    <p class="text-gray-500 dark:text-gray-300 text-xs mb-6">Ubah pesan
+                        rahasiamu
+                        secara otomatis
+                        dengan algoritma Caesar Cipher, Biner, atau Base64!</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <!-- Input Teks -->
+                        <div>
+                            <label
+                                class="block text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider mb-2">Teks
+                                Asli (Plaintext)</label>
+                            <textarea id="cipher-input" rows="4" placeholder="Ketik pesan rahasiamu di sini..."
+                                class="w-full p-4 rounded-2xl border border-amber-200 dark:bg-slate-900 dark:text-white font-sans text-sm focus:outline-none focus:border-amber-500"
+                                oninput="processCipher()"></textarea>
+                        </div>
+
+                        <!-- Output Ciphertext -->
+                        <div>
+                            <label
+                                class="block text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider mb-2">Hasil
+                                Terenkripsi (Ciphertext)</label>
+                            <div id="cipher-output"
+                                class="w-full h-32 p-4 rounded-2xl bg-amber-50/80 dark:bg-slate-900 border border-amber-200 font-mono text-sm text-amber-950 dark:text-amber-200 overflow-y-auto break-all">
+                                [Hasil enkripsi akan muncul secara langsung di sini]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Control Settings -->
+                    <div
+                        class="glass p-4 rounded-2xl border border-amber-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4 w-full sm:w-auto">
+                            <label class="text-xs font-bold text-gray-700 dark:text-gray-300">Metode
+                                Enkripsi:</label>
+                            <select id="cipher-mode" onchange="processCipher()"
+                                class="px-3 py-2 rounded-xl border border-amber-200 dark:bg-slate-700 dark:text-white text-xs font-bold focus:outline-none">
+                                <option value="caesar">Caesar Cipher (ROT)</option>
+                                <option value="binary">Teks ke Biner (0101)</option>
+                                <option value="base64">Base64 Encoding</option>
+                            </select>
+                        </div>
+
+                        <div id="caesar-shift-container" class="flex items-center gap-3 w-full sm:w-auto">
+                            <span class="text-xs font-bold text-gray-700 dark:text-gray-300">Shift
+                                Key: <span id="shift-val" class="text-amber-600 font-extrabold">3</span></span>
+                            <input id="shift-slider" type="range" min="1" max="25" value="3"
+                                oninput="document.getElementById('shift-val').innerText=this.value; processCipher();"
+                                class="w-28 accent-amber-500">
+                        </div>
+
+                        <button onclick="copyCipherOutput()"
+                            class="px-5 py-2 rounded-full bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs shadow-md transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-copy"></i> Salin Hasil Teks
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+    </main>
+
+    <script>
+        function bukaTugas(idTugas) {
+            document.getElementById('menu-utama').classList.add('hidden');
+            const tugasIds = ['artikel-keuangan', 'artikel-informatika', 'sistem-digital', 'kriptografi', 'imitation-game', 'game-binary', 'game-typer', 'tool-cipher'];
+            tugasIds.forEach(id => {
+                const el = document.getElementById('tugas-' + id);
+                if (el) {
+                    el.classList.add('hidden');
+                    el.classList.remove('fade-in');
+                }
+            });
+
+            const target = document.getElementById('tugas-' + idTugas);
+            if (target) {
+                target.classList.remove('hidden');
+                target.classList.add('fade-in');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function kembaliKeMenu() {
+            const tugasIds = ['artikel-keuangan', 'artikel-informatika', 'sistem-digital', 'kriptografi', 'imitation-game', 'game-binary', 'game-typer', 'tool-cipher'];
+            tugasIds.forEach(id => {
+                const el = document.getElementById('tugas-' + id);
+                if (el) {
+                    el.classList.add('hidden');
+                    el.classList.remove('fade-in');
+                }
+            });
+
+            const menu = document.getElementById('menu-utama');
+            if (menu) {
+                menu.classList.remove('hidden');
+                menu.classList.add('fade-in');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Web Audio Synthesizer Beep
+        function playBeep(freq = 520, type = 'sine', duration = 0.1) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = type;
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + duration);
+            } catch (e) { }
+        }
+
+        // 1. BINARY CODE BREAKER LOGIC
+        let binScore = 0;
+        let binTimeLeft = 30;
+        let binTimerId = null;
+        let currentDecimalTarget = 10;
+        let binHighScore = parseInt(localStorage.getItem('informatika_binary_highscore') || "0");
+        document.getElementById('bin-highscore').innerText = binHighScore;
+
+        function startBinaryGame() {
+            binScore = 0;
+            binTimeLeft = 30;
+            document.getElementById('bin-score').innerText = binScore;
+            document.getElementById('bin-timer').innerText = binTimeLeft;
+            document.getElementById('bin-start-btn').classList.add('hidden');
+            document.getElementById('bin-input').focus();
+
+            nextBinaryQuestion();
+
+            if (binTimerId) clearInterval(binTimerId);
+            binTimerId = setInterval(() => {
+                binTimeLeft--;
+                document.getElementById('bin-timer').innerText = binTimeLeft;
+                if (binTimeLeft <= 0) {
+                    endBinaryGame();
+                }
+            }, 1000);
+        }
+
+        function nextBinaryQuestion() {
+            currentDecimalTarget = Math.floor(Math.random() * 63) + 1; // 1 - 63
+            let binStr = currentDecimalTarget.toString(2).padStart(8, '0');
+            binStr = binStr.substring(0, 4) + ' ' + binStr.substring(4);
+            document.getElementById('bin-target').innerText = binStr;
+            document.getElementById('bin-input').value = '';
+        }
+
+        function checkBinaryAnswer() {
+            if (binTimeLeft <= 0) return;
+            const inputVal = parseInt(document.getElementById('bin-input').value);
+            const feedbackEl = document.getElementById('bin-feedback');
+
+            if (inputVal === currentDecimalTarget) {
+                binScore += 10;
+                document.getElementById('bin-score').innerText = binScore;
+                feedbackEl.innerText = "Tepat sekali! +10 poin 🎉";
+                feedbackEl.className = "mt-4 text-xs font-bold text-emerald-400";
+                playBeep(750, 'sine', 0.1);
+                nextBinaryQuestion();
+            } else {
+                feedbackEl.innerText = "Kurang tepat, coba lagi!";
+                feedbackEl.className = "mt-4 text-xs font-bold text-rose-400 animate-wiggle";
+                playBeep(250, 'sawtooth', 0.15);
+            }
+        }
+
+        function endBinaryGame() {
+            clearInterval(binTimerId);
+            if (binScore > binHighScore) {
+                binHighScore = binScore;
+                localStorage.setItem('informatika_binary_highscore', binHighScore);
+            }
+            document.getElementById('bin-highscore').innerText = binHighScore;
+            document.getElementById('bin-feedback').innerText = `Game Selesai! Skor Akhir Kamu: ${binScore}`;
+            document.getElementById('bin-start-btn').classList.remove('hidden');
+            document.getElementById('bin-start-btn').innerText = "Main Lagi 🔄";
+            playBeep(900, 'triangle', 0.25);
+        }
+
+        // 2. SPEED CODE TYPER LOGIC
+        const typeQuotes = [
+            "Alan Turing menciptakan mesin Bombe untuk memecahkan kode rahasia Enigma.",
+            "Kriptografi adalah seni menjaga kerahasiaan informasi di era digital.",
+            "Informatika menggabungkan logika matematika, algoritma, dan teknologi modern.",
+            "function decryptEnigma(ciphertext, key) { return decipher(ciphertext, key); }"
+        ];
+
+        let typeIndex = 0;
+        let typeTimerId = null;
+        let typeTimeLeft = 30;
+        let typeStartTime = null;
+
+        function startTypingGame() {
+            typeIndex = Math.floor(Math.random() * typeQuotes.length);
+            const targetQuote = typeQuotes[typeIndex];
+            document.getElementById('type-quote-box').innerText = targetQuote;
+
+            const inputEl = document.getElementById('type-input');
+            inputEl.disabled = false;
+            inputEl.value = '';
+            inputEl.focus();
+
+            typeTimeLeft = 30;
+            typeStartTime = new Date();
+            document.getElementById('type-timer').innerText = typeTimeLeft;
+            document.getElementById('type-wpm').innerText = 0;
+            document.getElementById('type-acc').innerText = "100%";
+
+            if (typeTimerId) clearInterval(typeTimerId);
+            typeTimerId = setInterval(() => {
+                typeTimeLeft--;
+                document.getElementById('type-timer').innerText = typeTimeLeft;
+                if (typeTimeLeft <= 0) {
+                    endTypingGame();
+                }
+            }, 1000);
+        }
+
+        function handleTypingInput() {
+            const inputVal = document.getElementById('type-input').value;
+            const target = typeQuotes[typeIndex];
+
+            // WPM calculation
+            const elapsedMinutes = (new Date() - typeStartTime) / 60000;
+            const wordsTyped = inputVal.trim().split(/\s+/).length;
+            const wpm = Math.round(wordsTyped / (elapsedMinutes || 0.01));
+            document.getElementById('type-wpm').innerText = Math.min(wpm, 150);
+
+            // Accuracy calculation
+            let correctChars = 0;
+            for (let i = 0; i < inputVal.length; i++) {
+                if (inputVal[i] === target[i]) correctChars++;
+            }
+            const acc = inputVal.length > 0 ? Math.round((correctChars / inputVal.length) * 100) : 100;
+            document.getElementById('type-acc').innerText = `${acc}%`;
+
+            if (inputVal === target) {
+                endTypingGame(true);
+            }
+        }
+
+        function endTypingGame(success = false) {
+            clearInterval(typeTimerId);
+            document.getElementById('type-input').disabled = true;
+
+            const badgeEl = document.getElementById('type-badge');
+            const wpm = parseInt(document.getElementById('type-wpm').innerText);
+
+            if (wpm > 60) badgeEl.innerText = "Level: Cyber Hacker 🚀";
+            else if (wpm > 35) badgeEl.innerText = "Level: Pro Coder 💻";
+            else badgeEl.innerText = "Level: Code Novice 🌱";
+
+            if (success) {
+                alert(`Selamat! Anda menyelesaikan tantangan dengan WPM ${wpm}! 🎉`);
+                playBeep(880, 'sine', 0.2);
+            }
+        }
+
+        // 3. SIMULATOR KRIPTOGRAFI LOGIC
+        function processCipher() {
+            const input = document.getElementById('cipher-input').value;
+            const mode = document.getElementById('cipher-mode').value;
+            const shift = parseInt(document.getElementById('shift-slider').value) || 3;
+            const outputEl = document.getElementById('cipher-output');
+
+            const shiftContainer = document.getElementById('caesar-shift-container');
+            if (shiftContainer) {
+                shiftContainer.style.display = mode === 'caesar' ? 'flex' : 'none';
+            }
+
+            if (!input) {
+                outputEl.innerText = "[Hasil enkripsi akan muncul secara langsung di sini]";
+                return;
+            }
+
+            let result = "";
+            if (mode === 'caesar') {
+                result = input.replace(/[a-zA-Z]/g, (c) => {
+                    const base = c >= 'a' ? 97 : 65;
+                    return String.fromCharCode((c.charCodeAt(0) - base + shift) % 26 + base);
+                });
+            } else if (mode === 'binary') {
+                result = input.split('').map(char => char.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
+            } else if (mode === 'base64') {
+                try {
+                    result = btoa(unescape(encodeURIComponent(input)));
+                } catch (e) {
+                    result = "Encoding Error";
+                }
+            }
+
+            outputEl.innerText = result;
+        }
+
+        function copyCipherOutput() {
+            const text = document.getElementById('cipher-output').innerText;
+            if (text && text !== "[Hasil enkripsi akan muncul secara langsung di sini]") {
+                navigator.clipboard.writeText(text);
+                alert("Teks hasil enkripsi berhasil disalin ke clipboard! 📋");
+                playBeep(600, 'sine', 0.1);
+            }
+        }
+    </script>
+
+    <script>
+        // Script for Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        // Cek preferensi sebelumnya
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+    <!-- Background Music Controller -->
+    <script src="bg-music.js"></script>
+</body>
+
+</html>
