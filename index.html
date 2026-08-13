@@ -1625,53 +1625,147 @@
             <h2
                 class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 to-orange-500 mb-2 font-playfair text-3xl font-bold">
                 &#127941; Nilai Rapot</h2>
-            <p class="text-gray-600 mb-8 font-medium">Rekapitulasi pencapaian akademik semester berjalan.</p>
-
+                       <p class="text-gray-600 mb-6 font-medium">Ringkasan Rapor Semester 2 Kelas 10 — Chelsea Catherine Pangestu (Kelas X 3, SMAS Cinta Kasih Tzu Chi)</p>
+            <!-- Card Summary Information -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div class="glass p-5 rounded-2xl flex items-center gap-4 bg-white/50 border border-sage-200">
+                    <div class="w-12 h-12 rounded-2xl bg-sage-100 flex items-center justify-center text-sage-600 text-xl shadow-inner">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Total Nilai</p>
+                        <p class="font-extrabold text-sage-800 text-2xl">1.010</p>
+                    </div>
+                </div>
+                <div class="glass p-5 rounded-2xl flex items-center gap-4 bg-white/50 border border-peach-200">
+                    <div class="w-12 h-12 rounded-2xl bg-peach-100 flex items-center justify-center text-peach-600 text-xl shadow-inner">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Rata-Rata</p>
+                        <p class="font-extrabold text-peach-600 text-2xl">91,82</p>
+                    </div>
+                </div>
+                <div class="glass p-5 rounded-2xl flex items-center gap-4 bg-white/50 border border-lavender-200">
+                    <div class="w-12 h-12 rounded-2xl bg-lavender-100 flex items-center justify-center text-lavender-600 text-xl shadow-inner">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Kelas & Semester</p>
+                        <p class="font-bold text-gray-800 text-sm">Kelas X 3 (Sem 2)</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Table Grades -->
             <div class="glass rounded-3xl p-6 md:p-8 shadow-md">
+                <div class="flex items-center justify-between mb-6 pb-3 border-b border-sage-200">
+                    <h3 class="font-bold text-sage-800 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-sage-600"></i> Daftar Nilai Mata Pelajaran
+                    </h3>
+                    <span class="px-3 py-1 bg-sage-100 text-sage-700 text-xs font-semibold rounded-full border border-sage-200">
+                        Semester 2 - Kelas 10
+                    </span>
+                </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-sage-100 text-sage-800">
-                                <th class="p-4 rounded-tl-xl font-bold">Mata Pelajaran</th>
-                                <th class="p-4 text-center font-bold">Tugas</th>
-                                <th class="p-4 text-center font-bold">UTS</th>
-                                <th class="p-4 rounded-tr-xl text-center font-bold">UAS</th>
+                               <tr class="bg-sage-100 text-sage-800 text-xs uppercase tracking-wider">
+                                <th class="p-4 rounded-tl-xl font-bold w-12 text-center">No</th>
+                                <th class="p-4 font-bold">Mata Pelajaran</th>
+                                <th class="p-4 text-center font-bold">Nilai Rapor</th>
+                                <th class="p-4 rounded-tr-xl text-center font-bold">Predikat</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-700 divide-y divide-sage-100">
-                            <tr class="hover:bg-white/50 transition">
-                                <td class="p-4 font-semibold"><i class="fa-solid fa-laptop-code text-sage-500 mr-2"></i>
-                                    Informatika</td>
-                                <td class="p-4 text-center">90</td>
-                                <td class="p-4 text-center">88</td>
-                                <td class="p-4 text-center font-bold text-sage-700">92</td>
+                          <tbody class="text-gray-700 divide-y divide-sage-100 text-sm">
+                            <tr class="hover:bg-white/60 transition">
+                                <td class="p-4 text-center font-bold text-gray-400">1</td>
+                                <td class="p-4 font-semibold"><i class="fa-solid fa-cross text-amber-500 mr-2"></i> Pendidikan Agama Kristen dan Budi Pekerti</td>
+                                <td class="p-4 text-center font-extrabold text-sage-700">97</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">Sangat Baik</span></td>
                             </tr>
-                            <tr class="hover:bg-white/50 transition">
-                                <td class="p-4 font-semibold"><i class="fa-solid fa-pen-nib text-peach-500 mr-2"></i>
-                                    Bahasa Indonesia</td>
-                                <td class="p-4 text-center">85</td>
-                                <td class="p-4 text-center">90</td>
-                                <td class="p-4 text-center font-bold text-sage-700">90</td>
+                              <tr class="hover:bg-white/60 transition">
+                                <td class="p-4 text-center font-bold text-gray-400">3</td>
+                                <td class="p-4 font-semibold"><i class="fa-solid fa-book text-emerald-500 mr-2"></i> Bahasa Indonesia</td>
+                                <td class="p-4 text-center font-extrabold text-sage-700">92</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">Sangat Baik</span></td>
                             </tr>
-                            <tr class="hover:bg-white/50 transition">
-                                <td class="p-4 font-semibold"><i class="fa-solid fa-language text-blue-500 mr-2"></i>
-                                    Bahasa Inggris</td>
-                                <td class="p-4 text-center">92</td>
-                                <td class="p-4 text-center">94</td>
-                                <td class="p-4 text-center font-bold text-sage-700">95</td>
+                                <tr class="hover:bg-white/60 transition">
+                                <td class="p-4 text-center font-bold text-gray-400">4</td>
+                                <td class="p-4 font-semibold"><i class="fa-solid fa-language text-blue-500 mr-2"></i> Bahasa Inggris</td>
+                                <td class="p-4 text-center font-extrabold text-sage-700">87</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 border border-blue-200">Baik</span></td>
                             </tr>
-                            <tr class="hover:bg-white/50 transition">
-                                <td class="p-4 font-semibold"><i class="fa-solid fa-yin-yang text-red-500 mr-2"></i>
-                                    Bahasa Mandarin</td>
-                                <td class="p-4 text-center">88</td>
-                                <td class="p-4 text-center">85</td>
-                                <td class="p-4 text-center font-bold text-sage-700">89</td>
+                            <tr class="hover:bg-white/60 transition">
+                                <td class="p-4 text-center font-bold text-gray-400">5</td>
+                                <td class="p-4 font-semibold"><i class="fa-solid fa-calculator text-indigo-500 mr-2"></i> Matematika (Umum)</td>
+                                <td class="p-4 text-center font-extrabold text-sage-700">98</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">Sangat Baik</span></td>
+                            </tr>
+                            <tr class="hover:bg-white/60 transition">
+                                <td class="p-4 text-center font-bold text-gray-400">6</td>
+                                <td class="p-4 font-semibold"><i class="fa-solid fa-flask text-teal-500 mr-2"></i> Ilmu Pengetahuan Alam (IPA)</td>
+                                <td class="p-4 text-center font-extrabold text-sage-700">88</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 border border-blue-200">Baik</span></td>
+                            </tr>
+                            <tr class="hover:bg-white/60 transition">
+                                <td class="p-4 text-center font-bold text-gray-400">7</td>
+                                <td class="p-4 font-semibold"><i class="fa-solid fa-earth-americas text-amber-600 mr-2"></i> Ilmu Pengetahuan Sosial (IPS)</td>
+                                <td class="p-4 text-center font-extrabold text-sage-700">92</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">Sangat Baik</span></td>
+                            </tr>
+                            <tr class="hover:bg-white/60 transition">
+                                <td class="p-4 text-center font-bold text-gray-400">8</td>
+                                <td class="p-4 font-semibold"><i class="fa-solid fa-person-running text-orange-500 mr-2"></i> Pendidikan Jasmani, Olahraga, dan Kesehatan</td>
+                                <td class="p-4 text-center font-extrabold text-sage-700">89</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 border border-blue-200">Baik</span></td>
+                            </tr>
+                            <tr class="hover:bg-white/60 transition">
+                                <td class="p-4 text-center font-bold text-gray-400">9</td>
+                                <td class="p-4 font-semibold"><i class="fa-solid fa-laptop-code text-cyan-500 mr-2"></i> Informatika</td>
+                                <td class="p-4 text-center font-extrabold text-sage-700">92</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">Sangat Baik</span></td>
+                            </tr>
+                            <tr class="hover:bg-white/60 transition">
+                                <td class="p-4 text-center font-bold text-gray-400">10</td>
+                                <td class="p-4 font-semibold"><i class="fa-solid fa-palette text-purple-500 mr-2"></i> Seni dan Budaya</td>
+                                <td class="p-4 text-center font-extrabold text-sage-700">92</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">Sangat Baik</span></td>
+                            </tr>
+                            <tr class="hover:bg-white/60 transition">
+                                <td class="p-4 text-center font-bold text-gray-400">11</td>
+                                <td class="p-4 font-semibold"><i class="fa-solid fa-comment-dots text-rose-500 mr-2"></i> Bahasa Mandarin</td>
+                                <td class="p-4 text-center font-extrabold text-sage-700">91</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">Sangat Baik</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <!-- Footer Summary Card -->
+                <div class="mt-6 pt-6 border-t border-sage-200 flex flex-col sm:flex-row items-center justify-between gap-4 bg-sage-50/60 p-4 rounded-2xl border border-sage-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-sage-200 flex items-center justify-center text-sage-700 font-bold">
+                            <i class="fa-solid fa-award text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium">Rekapitulasi Rapor</p>
+                            <p class="text-sm font-bold text-sage-800">SMAS Cinta Kasih Tzu Chi</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500 font-medium">Total Nilai</p>
+                            <p class="text-lg font-extrabold text-sage-700">1.010</p>
+                        </div>
+                        <div class="h-8 w-px bg-sage-200"></div>
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500 font-medium">Rata-Rata</p>
+                            <p class="text-lg font-extrabold text-peach-600">91,82</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
 
         <!-- 20. HALAMAN PUSTAKA -->
         <section id="pustaka" class="page-section max-w-4xl mx-auto">
