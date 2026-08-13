@@ -5,8 +5,9 @@
  */
 
 (function () {
-      const STORAGE_KEY_SPOTIFY_URL = "portfolio_spotify_embed_url";
+    const STORAGE_KEY_SPOTIFY_URL = "portfolio_spotify_embed_url";
     const STORAGE_KEY_SPOTIFY_TITLE = "portfolio_spotify_title";
+
     // Spotify Curated Presets
     const SPOTIFY_PRESETS = [
         {
@@ -47,10 +48,10 @@
         }
     ];
 
-     let currentSpotifyUrl = localStorage.getItem(STORAGE_KEY_SPOTIFY_URL) || SPOTIFY_PRESETS[0].url;
+    let currentSpotifyUrl = localStorage.getItem(STORAGE_KEY_SPOTIFY_URL) || SPOTIFY_PRESETS[0].url;
     let currentSpotifyTitle = localStorage.getItem(STORAGE_KEY_SPOTIFY_TITLE) || SPOTIFY_PRESETS[0].name;
 
- // Inject Styles for Music Player & Spotify Modal
+    // Inject Styles for Music Player & Spotify Modal
     function injectStyles() {
         if (document.getElementById("bg-music-styles")) return;
         const style = document.createElement("style");
@@ -78,7 +79,7 @@
             .eq-bar-1 { animation: eqBar1 0.8s ease-in-out infinite; }
             .eq-bar-2 { animation: eqBar2 0.7s ease-in-out infinite 0.15s; }
             .eq-bar-3 { animation: eqBar3 0.9s ease-in-out infinite 0.3s; }
-             .spotify-glow {
+            .spotify-glow {
                 box-shadow: 0 0 20px rgba(29, 185, 84, 0.45);
             }
             .spotify-bg-gradient {
@@ -100,10 +101,11 @@
         document.head.appendChild(style);
     }
 
-     // Helper: Parse Spotify URL / URI to Embed URL
+    // Helper: Parse Spotify URL / URI to Embed URL
     function formatSpotifyEmbedUrl(inputUrl) {
         if (!inputUrl) return null;
         let url = inputUrl.trim();
+
         // Handle spotify:type:id
         if (url.startsWith('spotify:')) {
             const parts = url.split(':');
@@ -111,6 +113,7 @@
                 return `https://open.spotify.com/embed/${parts[1]}/${parts[2]}?utm_source=generator&theme=0`;
             }
         }
+
         // Handle https://open.spotify.com/...
         try {
             const match = url.match(/spotify\.com\/(?:embed\/)?(track|playlist|album|artist)\/([a-zA-Z0-9]+)/);
@@ -118,26 +121,28 @@
                 return `https://open.spotify.com/embed/${match[1]}/${match[2]}?utm_source=generator&theme=0`;
             }
         } catch (e) { }
+
         return null;
     }
+
     // Create & Inject Floating Spotify Widget + Modal
     function createMusicPlayerUI() {
         if (document.getElementById("bg-music-widget")) return;
 
         const widget = document.createElement("div");
         widget.id = "bg-music-widget";
-       widget.className = "fixed bottom-5 right-5 z-50 flex items-center select-none";
+        widget.className = "fixed bottom-5 right-5 z-50 flex items-center select-none";
 
         widget.innerHTML = `
-                      <!-- Floating Spotify Control Pill -->
+            <!-- Floating Spotify Control Pill -->
             <div id="music-pill" class="glass rounded-full px-3.5 py-2 flex items-center gap-3 shadow-2xl border border-emerald-400/40 backdrop-blur-xl transition-all duration-300 hover:scale-105 bg-black/75 text-white cursor-pointer spotify-glow" onclick="toggleSpotifyModal()">
-
-              <!-- Spotify Icon Button -->
+                
+                <!-- Spotify Icon Button -->
                 <div class="w-10 h-10 rounded-full bg-[#1DB954] text-black flex items-center justify-center shadow-lg font-black text-xl flex-shrink-0 animate-pulse">
                     <i class="fa-brands fa-spotify"></i>
                 </div>
 
-                      <!-- Info Track / Playlist -->
+                <!-- Info Track / Playlist -->
                 <div class="flex flex-col pr-1 min-w-[120px] max-w-[160px]">
                     <div class="flex items-center gap-1.5">
                         <span class="text-[10px] font-black text-[#1DB954] tracking-wider uppercase flex items-center gap-1">
@@ -150,22 +155,40 @@
                             <span class="w-0.5 bg-[#1DB954] rounded-full eq-bar-3"></span>
                         </div>
                     </div>
-                   <span id="music-status-text" class="text-xs text-gray-200 font-bold truncate">
+                    <span id="music-status-text" class="text-xs text-gray-200 font-bold truncate">
                         ${escapeHTML(currentSpotifyTitle)}
                     </span>
                 </div>
 
-               <!-- Change Song Button -->
+                <!-- Change Song Button -->
                 <button title="Pilih / Cari Lagu Spotify" class="bg-white/10 hover:bg-[#1DB954] hover:text-black text-white text-xs px-2.5 py-1.5 rounded-full font-bold transition-all flex items-center gap-1 border border-white/10">
                     <i class="fa-solid fa-sliders"></i> <span class="hidden sm:inline">Pilih Lagu</span>
                 </button>
             </div>
 
-             <!-- Change Song Button -->
-                <button title="Pilih / Cari Lagu Spotify" class="bg-white/10 hover:bg-[#1DB954] hover:text-black text-white text-xs px-2.5 py-1.5 rounded-full font-bold transition-all flex items-center gap-1 border border-white/10">
-                    <i class="fa-solid fa-sliders"></i> <span class="hidden sm:inline">Pilih Lagu</span>
-                </button>
-                      <!-- Scrollable Modal Content -->
+            <!-- Spotify Modal Drawer -->
+            <div id="spotify-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
+                <div class="spotify-bg-gradient rounded-3xl p-5 sm:p-6 max-w-lg w-full shadow-2xl border border-[#1DB954]/40 relative text-white max-h-[90vh] flex flex-col overflow-hidden animate-fade-in-up">
+                    
+                    <!-- Modal Header -->
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-[#1DB954] text-black flex items-center justify-center text-2xl font-black shadow-lg">
+                                <i class="fa-brands fa-spotify"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-black font-playfair text-white flex items-center gap-2">
+                                    Spotify Music Player 🎵
+                                </h3>
+                                <p class="text-xs text-gray-400">Pilih playlist favorit atau masukkan link lagu Spotify kamu!</p>
+                            </div>
+                        </div>
+                        <button onclick="toggleSpotifyModal()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-red-500 hover:text-white flex items-center justify-center text-gray-300 transition-all text-base">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <!-- Scrollable Modal Content -->
                     <div class="spotify-scroll overflow-y-auto flex-grow pr-1 space-y-5">
                         
                         <!-- Embedded Spotify Player Frame -->
@@ -182,7 +205,7 @@
                             </iframe>
                         </div>
 
-      <!-- Custom Spotify Link Input -->
+                        <!-- Custom Spotify Link Input -->
                         <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
                             <label class="block text-xs font-bold text-[#1DB954] mb-1.5 uppercase tracking-wide flex items-center gap-1.5">
                                 <i class="fa-solid fa-link"></i> Putar Lagu / Playlist Spotify Anda
@@ -200,7 +223,7 @@
                             <p id="spotify-input-error" class="text-[11px] text-rose-400 mt-1.5 hidden font-medium">Link Spotify tidak valid. Harap gunakan format link Spotify yang benar.</p>
                         </div>
 
-                         <!-- Curated Preset Playlists -->
+                        <!-- Curated Preset Playlists -->
                         <div>
                             <h4 class="text-xs font-bold text-gray-300 uppercase tracking-wide mb-3 flex items-center gap-1.5">
                                 <i class="fa-solid fa-compact-disc text-[#1DB954]"></i> Rekomendasi Playlist Mood
@@ -222,8 +245,10 @@
                                 `).join('')}
                             </div>
                         </div>
-       </div>
-                     <!-- Footer -->
+
+                    </div>
+
+                    <!-- Footer -->
                     <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-gray-400">
                         <span>💡 Musik tersimpan otomatis saat berpindah halaman</span>
                         <button onclick="toggleSpotifyModal()" class="text-xs font-bold text-[#1DB954] hover:underline">
@@ -231,15 +256,14 @@
                         </button>
                     </div>
 
-                   </div>
+                </div>
             </div>
         `;
-                  document.body.appendChild(widget);
+
+        document.body.appendChild(widget);
     }
 
-
-
-     // Toggle Modal Visibility
+    // Toggle Modal Visibility
     window.toggleSpotifyModal = function () {
         const modal = document.getElementById("spotify-modal");
         if (modal) {
@@ -252,8 +276,8 @@
         const input = document.getElementById("spotify-custom-input");
         const errorEl = document.getElementById("spotify-input-error");
         if (!input) return;
-        
-       const embedUrl = formatSpotifyEmbedUrl(input.value);
+
+        const embedUrl = formatSpotifyEmbedUrl(input.value);
         if (embedUrl) {
             if (errorEl) errorEl.classList.add("hidden");
             const title = "Custom Spotify Music 🎵";
@@ -265,42 +289,39 @@
         }
     };
 
-      // Select Curated Preset
+    // Select Curated Preset
     window.selectSpotifyPreset = function (index) {
         const preset = SPOTIFY_PRESETS[index];
         if (!preset) return;
         updateSpotifyPlayer(preset.url, preset.name);
         toggleSpotifyModal();
     };
-         // Update Player & Persist
+
+    // Update Player & Persist
     function updateSpotifyPlayer(url, title) {
         currentSpotifyUrl = url;
         currentSpotifyTitle = title;
         localStorage.setItem(STORAGE_KEY_SPOTIFY_URL, url);
         localStorage.setItem(STORAGE_KEY_SPOTIFY_TITLE, title);
 
-          const iframe = document.getElementById("spotify-iframe");
+        const iframe = document.getElementById("spotify-iframe");
         if (iframe) iframe.src = url;
-      
+
         const statusText = document.getElementById("music-status-text");
-          if (statusText) statusText.innerText = title;
-     
+        if (statusText) statusText.innerText = title;
     }
 
     // Escape HTML Helper
     function escapeHTML(str) {
         if (!str) return '';
         return str.replace(/[&<>'"]/g,
-            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#
-               
+            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
     }
 
-// Init function
+    // Init function
     function init() {
         injectStyles();
         createMusicPlayerUI();
-      
-        }
     }
 
     if (document.readyState === "loading") {
